@@ -20,17 +20,17 @@ public class CreateStudentDemo {
 		Session session=factory.getCurrentSession();
 		
 		try {
-			int studentId=1;
+			int studentId=5;
 		
 			session.beginTransaction();
 		    student  myStudent=session.get(student.class, studentId);	
-		    myStudent.setFirstname("Scooby");
+		    session.delete(myStudent);
 			session.getTransaction().commit(); 
 			
 			Session session1=factory.getCurrentSession();
 			session1.beginTransaction();
 		    
-			session1.createQuery("update student set email='hij@gmail.com'").executeUpdate();
+			session1.createQuery("delete from student where id=2").executeUpdate();
 			session1.getTransaction().commit(); 
 			
 			
