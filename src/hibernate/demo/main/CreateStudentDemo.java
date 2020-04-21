@@ -20,24 +20,18 @@ public class CreateStudentDemo {
 		Session session=factory.getCurrentSession();
 		
 		try {
-		
+			int studentId=1;
 		
 			session.beginTransaction();
-			List<student> theStudents=session.createQuery("from student").getResultList();
-			
-			for(student tempStudent: theStudents)
-			{
-				System.out.println(tempStudent);
-			}
-			
-			theStudents=session.createQuery("from student s where s.firstname='Karan'").list();
-			
-			for(student tempStudent: theStudents)
-			{
-				System.out.println(tempStudent);
-			}
+		    student  myStudent=session.get(student.class, studentId);	
+		    myStudent.setFirstname("Scooby");
 			session.getTransaction().commit(); 
 			
+			Session session1=factory.getCurrentSession();
+			session1.beginTransaction();
+		    
+			session1.createQuery("update student set email='hij@gmail.com'").executeUpdate();
+			session1.getTransaction().commit(); 
 			
 			
 			
